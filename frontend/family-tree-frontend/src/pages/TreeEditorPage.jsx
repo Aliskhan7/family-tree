@@ -320,32 +320,44 @@ const TreeEditorPage = () => {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
       minHeight: '100vh',
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      position: 'relative'
     },
     forest: {
       backgroundImage: 'url(/backgrounds/forest.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
       minHeight: '100vh',
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      position: 'relative'
     },
     ocean: {
       backgroundImage: 'url(/backgrounds/ocean.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
       minHeight: '100vh',
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      position: 'relative'
     },
     sunset: {
       backgroundImage: 'url(/backgrounds/sunset.jpg)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
       minHeight: '100vh',
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      position: 'relative'
     },
     plain: {
       backgroundColor: '#f8fafc',
@@ -663,7 +675,6 @@ const TreeEditorPage = () => {
           <TreeExporter 
             treeName={treeName}
             backgroundImage={backgroundImage}
-            onBackgroundChange={setBackgroundImage}
           />
         </div>
       </div>
@@ -676,7 +687,7 @@ const TreeEditorPage = () => {
       )}
 
       {/* React Flow Canvas */}
-      <div className="flex-1 h-full w-full background-container" style={getCurrentBackgroundStyle()}>
+      <div className="flex-1 h-full w-full background-container cover" style={getCurrentBackgroundStyle()}>
         <ReactFlow
           nodes={nodes}
           edges={edges}

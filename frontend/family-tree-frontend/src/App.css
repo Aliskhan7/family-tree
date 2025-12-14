@@ -121,13 +121,20 @@
 
 /* Фиксация фоновых изображений */
 .background-container {
-  /* background-size: cover !important; */
+  background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-attachment: scroll !important;
   height: 100% !important;
   width: 100% !important;
   object-fit: cover !important;
+  position: relative !important;
+}
+
+.background-container.cover {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
 }
 
 .react-flow {
@@ -150,4 +157,28 @@
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
+}
+
+/* Стили для экспорта - убеждаемся что все элементы видны */
+.react-flow__node {
+  background-color: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.react-flow__edge {
+  stroke: #374151 !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Обеспечиваем видимость текста в узлах */
+.react-flow__node * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: inherit !important;
 }
