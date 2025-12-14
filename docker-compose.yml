@@ -1,0 +1,43 @@
+services:
+  # Бэкенд сервис
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: family-tree-backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - backend_data:/app/data
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=sqlite:///data/family_tree.db
+      - JWT_SECRET_KEY=your-super-secret-jwt-key-change-in-production
+    restart: unless-stopped
+    networks:
+      - family-tree-network
+
+  # Фронтенд сервис
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: family-tree-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - family-tree-network
+
+# Сети
+networks:
+  family-tree-network:
+    driver: bridge
+
+# Тома для постоянного хранения данных
+volumes:
+  backend_data:
+    driver: local
+
