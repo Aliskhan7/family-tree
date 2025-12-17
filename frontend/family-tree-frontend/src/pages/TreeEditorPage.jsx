@@ -680,6 +680,14 @@ const TreeEditorPage = () => {
                 <p>• Перетащите от точки одного узла к точке другого</p>
                 <p>• Добавляйте новых людей через кнопку "+"</p>
                 <p>• Сохраняйте изменения регулярно</p>
+                <div className="border-t border-gray-200 mt-3 pt-2">
+                  <p className="text-xs text-gray-500 flex items-center">
+                    <span className="w-4 h-4 bg-amber-400 rounded-full flex items-center justify-center mr-2">
+                      <span className="text-gray-900 font-bold text-xs">AG</span>
+                    </span>
+                    by Aliskhan Gazamatov
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </Panel>

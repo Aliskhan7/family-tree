@@ -144,6 +144,54 @@ const HomePage = () => {
           </Link>
         </div>
       </div>
+
+      {/* Footer с информацией о создателе */}
+      <footer className="py-8 bg-gray-900 border-t border-amber-500/20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
+                <span className="text-gray-900 font-bold text-sm">AG</span>
+              </div>
+              <div className="text-left">
+                <p className="text-gray-300 text-sm font-medium">Создано с ❤️</p>
+                <p className="text-amber-400 text-xs">Aliskhan Gazamatov</p>
+              </div>
+            </div>
+            
+            <div className="flex justify-center space-x-6 mb-4">
+              <a 
+                href="https://ag-one.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+              >
+                🌐 Портфолио
+              </a>
+              <a 
+                href="https://t.me/agfrontend" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+              >
+                📱 Telegram
+              </a>
+              <a 
+                href="https://www.instagram.com/a.gazamatov" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+              >
+                📸 Instagram
+              </a>
+            </div>
+            
+            <p className="text-gray-500 text-xs">
+              Frontend Developer | React.js, Next.js, TypeScript
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
