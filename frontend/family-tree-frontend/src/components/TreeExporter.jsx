@@ -20,14 +20,25 @@ const TreeExporter = ({
           el.style.display = 'none';
         });
 
+        // Определяем качество в зависимости от устройства
+        const isMobile = window.innerWidth <= 768;
+        const devicePixelRatio = window.devicePixelRatio || 1;
+        const exportPixelRatio = Math.max(devicePixelRatio, isMobile ? 3 : 2); // Минимум 3x для мобильных, 2x для десктопа
+        
         // Создаем canvas для композитного изображения
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         
-        // Устанавливаем размер canvas
+        // Устанавливаем размер canvas с учетом высокого разрешения
         const rect = reactFlowWrapper.getBoundingClientRect();
-        canvas.width = rect.width;
-        canvas.height = rect.height;
+        const scaledWidth = rect.width * exportPixelRatio;
+        const scaledHeight = rect.height * exportPixelRatio;
+        
+        canvas.width = scaledWidth;
+        canvas.height = scaledHeight;
+        
+        // Масштабируем контекст для высокого разрешения
+        ctx.scale(exportPixelRatio, exportPixelRatio);
         
         // Сначала рисуем фоновое изображение
         if (backgroundImage === 'sunset') {
@@ -37,9 +48,9 @@ const TreeExporter = ({
           await new Promise((resolve, reject) => {
             bgImage.onload = () => {
               // Рисуем фоновое изображение с cover эффектом
-              const scale = Math.max(canvas.width / bgImage.width, canvas.height / bgImage.height);
-              const x = (canvas.width - bgImage.width * scale) / 2;
-              const y = (canvas.height - bgImage.height * scale) / 2;
+              const scale = Math.max(rect.width / bgImage.width, rect.height / bgImage.height);
+              const x = (rect.width - bgImage.width * scale) / 2;
+              const y = (rect.height - bgImage.height * scale) / 2;
               
               ctx.drawImage(bgImage, x, y, bgImage.width * scale, bgImage.height * scale);
               resolve();
@@ -48,51 +59,54 @@ const TreeExporter = ({
             bgImage.src = '/backgrounds/sunset.jpg';
           });
         } else if (backgroundImage === 'mountains') {
-          // Рисуем градиент для горы
-          const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-          gradient.addColorStop(0, '#2563eb');
-          gradient.addColorStop(0.25, '#4338ca');
-          gradient.addColorStop(0.5, '#7c3aed');
-          gradient.addColorStop(0.75, '#a855f7');
-          gradient.addColorStop(1, '#ec4899');
+          // Рисуем градиент для горы (обновленный кавказский стиль)
+          const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+          gradient.addColorStop(0, '#1f2937'); // slate-900
+          gradient.addColorStop(0.25, '#374151'); // gray-800
+          gradient.addColorStop(0.5, '#065f46'); // emerald-900
+          gradient.addColorStop(0.75, '#a16207'); // amber-800
+          gradient.addColorStop(1, '#1f2937'); // slate-900
           ctx.fillStyle = gradient;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillRect(0, 0, rect.width, rect.height);
         } else {
-          // Белый фон для plain
-          ctx.fillStyle = '#f8fafc';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          // Темно-серый фон для plain (кавказский стиль)
+          ctx.fillStyle = '#1f2937'; // slate-900
+          ctx.fillRect(0, 0, rect.width, rect.height);
         }
         
-        // Теперь захватываем React Flow поверх фона
+        // Теперь захватываем React Flow поверх фона с высоким качеством
         const reactFlowDataUrl = await toPng(reactFlowWrapper, {
-          quality: 0.95,
-          pixelRatio: 1,
+          quality: 1.0, // Максимальное качество
+          pixelRatio: exportPixelRatio, // Высокое разрешение
           backgroundColor: 'transparent',
           useCORS: true,
-          allowTaint: true
+          allowTaint: true,
+          width: rect.width,
+          height: rect.height
         });
         
         // Накладываем React Flow поверх фона
         const reactFlowImage = new Image();
         await new Promise((resolve) => {
           reactFlowImage.onload = () => {
-            ctx.drawImage(reactFlowImage, 0, 0);
+            ctx.drawImage(reactFlowImage, 0, 0, rect.width, rect.height);
             resolve();
           };
           reactFlowImage.src = reactFlowDataUrl;
         });
         
-        // Конвертируем canvas в data URL
-        const finalDataUrl = canvas.toDataURL('image/png', 0.95);
+        // Конвертируем canvas в data URL с максимальным качеством
+        const finalDataUrl = canvas.toDataURL('image/png', 1.0);
         
         // Показываем элементы управления обратно
         controlsElements.forEach(el => {
           el.style.display = '';
         });
         
-        // Скачиваем файл
+        // Скачиваем файл с информацией о качестве
         const link = document.createElement('a');
-        link.download = 'family_tree.png';
+        const qualityInfo = isMobile ? '_mobile_hq' : '_desktop_hq';
+        link.download = `family_tree${qualityInfo}.png`;
         link.href = finalDataUrl;
         link.click();
         
