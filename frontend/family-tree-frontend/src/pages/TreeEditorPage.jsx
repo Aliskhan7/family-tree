@@ -43,7 +43,7 @@ const TreeEditorPage = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [treeName, setTreeName] = useState('Новое дерево');
-  const [backgroundImage, setBackgroundImage] = useState('mountains');
+  const [backgroundImage, setBackgroundImage] = useState('sunset');
   const [customBackground, setCustomBackground] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -102,7 +102,7 @@ const TreeEditorPage = () => {
       const availableBackgrounds = ['mountains', 'sunset', 'plain'];
       const backgroundImage = tree.background_image && availableBackgrounds.includes(tree.background_image) 
         ? tree.background_image 
-        : 'mountains';
+        : 'sunset';
       setBackgroundImage(backgroundImage);
       
       if (tree.data && tree.data.nodes) {

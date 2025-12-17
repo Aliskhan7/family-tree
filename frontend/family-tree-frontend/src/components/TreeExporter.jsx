@@ -5,7 +5,7 @@ import { Download, Loader2 } from 'lucide-react';
 
 const TreeExporter = ({ 
   treeName = 'Родословное дерево',
-  backgroundImage = 'mountains',
+  backgroundImage = 'sunset',
   className = '' 
 }) => {
   const [isExporting, setIsExporting] = useState(false);

@@ -81,7 +81,7 @@ const DashboardPage = () => {
       sunset: 'Закат',
       plain: 'Простой'
     };
-    return backgrounds[background] || 'Градиент';
+    return backgrounds[background] || 'Закат';
   };
 
   return (
