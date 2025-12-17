@@ -161,13 +161,15 @@
 
 /* Стили для кнопки редактирования - скрыта по умолчанию */
 .person-card .edit-button {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out !important;
 }
 
 /* Показываем кнопку при наведении на карточку */
 .person-card:hover .edit-button {
-  opacity: 1;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Стили для экспорта - убеждаемся что все элементы видны */
@@ -192,4 +194,26 @@
   opacity: 1 !important;
   visibility: visible !important;
   color: inherit !important;
+}
+
+/* Поднимаем навигационные элементы выше на мобильных устройствах */
+@media (max-width: 768px) {
+  .react-flow__controls {
+    bottom: 80px !important;
+  }
+  
+  .react-flow__minimap {
+    bottom: 80px !important;
+  }
+}
+
+/* Дополнительный отступ для очень маленьких экранов */
+@media (max-width: 480px) {
+  .react-flow__controls {
+    bottom: 100px !important;
+  }
+  
+  .react-flow__minimap {
+    bottom: 100px !important;
+  }
 }

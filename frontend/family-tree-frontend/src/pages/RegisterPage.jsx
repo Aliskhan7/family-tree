@@ -91,22 +91,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-sm sm:max-w-md">
         {/* Logo */}
         <div className="text-center mb-6 sm:mb-8">
           <Link to="/" className="inline-flex items-center space-x-2">
-            <TreePine className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
-            <span className="text-lg sm:text-2xl font-bold text-gray-900">Родословное дерево</span>
+            <TreePine className="h-6 w-6 sm:h-8 sm:w-8 text-amber-400" />
+            <span className="text-lg sm:text-2xl font-bold text-gray-100">Родословное дерево</span>
           </Link>
         </div>
 
-        <Card className="shadow-lg border-0">
+        <Card className="shadow-xl border border-amber-500/20 bg-gray-800/90 backdrop-blur-sm">
           <CardHeader className="text-center pb-4 sm:pb-6">
-            <CardTitle className="text-xl sm:text-2xl font-bold text-gray-900">
+            <CardTitle className="text-xl sm:text-2xl font-bold text-gray-100">
               Создать аккаунт
             </CardTitle>
-            <CardDescription className="text-sm sm:text-base text-gray-600">
+            <CardDescription className="text-sm sm:text-base text-gray-300">
               Зарегистрируйтесь, чтобы сохранять и редактировать свои деревья
             </CardDescription>
           </CardHeader>
@@ -120,7 +120,7 @@ const RegisterPage = () => {
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="username">Имя пользователя</Label>
+                <Label htmlFor="username" className="text-gray-200">Имя пользователя</Label>
                 <Input
                   id="username"
                   name="username"
@@ -129,7 +129,7 @@ const RegisterPage = () => {
                   onChange={handleChange}
                   placeholder="Введите имя пользователя"
                   required
-                  className="h-11"
+                  className="h-11 bg-gray-700/50 border-amber-500/30 text-gray-100 placeholder:text-gray-400"
                 />
                 {formData.username.length > 0 && (
                   <div className="flex items-center text-sm">
@@ -138,7 +138,7 @@ const RegisterPage = () => {
                     ) : (
                       <X className="h-4 w-4 text-red-500 mr-1" />
                     )}
-                    <span className={formData.username.length >= 3 ? 'text-green-600' : 'text-red-600'}>
+                    <span className={formData.username.length >= 3 ? 'text-emerald-400' : 'text-red-400'}>
                       Минимум 3 символа
                     </span>
                   </div>
@@ -146,7 +146,7 @@ const RegisterPage = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-gray-200">Email</Label>
                 <Input
                   id="email"
                   name="email"
@@ -155,12 +155,12 @@ const RegisterPage = () => {
                   onChange={handleChange}
                   placeholder="Введите email адрес"
                   required
-                  className="h-11"
+                  className="h-11 bg-gray-700/50 border-amber-500/30 text-gray-100 placeholder:text-gray-400"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Пароль</Label>
+                <Label htmlFor="password" className="text-gray-200">Пароль</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -170,12 +170,12 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     placeholder="Введите пароль"
                     required
-                    className="h-11 pr-10"
+                    className="h-11 pr-10 bg-gray-700/50 border-amber-500/30 text-gray-100 placeholder:text-gray-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-amber-400"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -187,7 +187,7 @@ const RegisterPage = () => {
                     ) : (
                       <X className="h-4 w-4 text-red-500 mr-1" />
                     )}
-                    <span className={passwordStrength.length ? 'text-green-600' : 'text-red-600'}>
+                    <span className={passwordStrength.length ? 'text-emerald-400' : 'text-red-400'}>
                       Минимум 6 символов
                     </span>
                   </div>
@@ -195,7 +195,7 @@ const RegisterPage = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Подтвердите пароль</Label>
+                <Label htmlFor="confirmPassword" className="text-gray-200">Подтвердите пароль</Label>
                 <div className="relative">
                   <Input
                     id="confirmPassword"
@@ -205,12 +205,12 @@ const RegisterPage = () => {
                     onChange={handleChange}
                     placeholder="Повторите пароль"
                     required
-                    className="h-11 pr-10"
+                    className="h-11 pr-10 bg-gray-700/50 border-amber-500/30 text-gray-100 placeholder:text-gray-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-amber-400"
                   >
                     {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -222,7 +222,7 @@ const RegisterPage = () => {
                     ) : (
                       <X className="h-4 w-4 text-red-500 mr-1" />
                     )}
-                    <span className={passwordStrength.match ? 'text-green-600' : 'text-red-600'}>
+                    <span className={passwordStrength.match ? 'text-emerald-400' : 'text-red-400'}>
                       Пароли совпадают
                     </span>
                   </div>
@@ -231,7 +231,7 @@ const RegisterPage = () => {
               
               <Button 
                 type="submit" 
-                className="w-full h-11 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                className="w-full h-11 bg-emerald-700 hover:bg-emerald-800 border border-amber-500/30 shadow-lg"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -246,16 +246,16 @@ const RegisterPage = () => {
             </form>
             
             <div className="mt-6 text-center">
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Уже есть аккаунт?{' '}
-                <Link to="/login" className="text-green-600 hover:text-green-700 font-medium">
+                <Link to="/login" className="text-amber-400 hover:text-amber-300 font-medium">
                   Войти
                 </Link>
               </p>
             </div>
             
             <div className="mt-4 text-center">
-              <Link to="/tree/create" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/tree/create" className="text-emerald-400 hover:text-emerald-300 font-medium">
                 Создать дерево без регистрации
               </Link>
             </div>

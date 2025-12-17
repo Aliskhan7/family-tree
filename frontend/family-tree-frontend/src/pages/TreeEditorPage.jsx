@@ -302,19 +302,7 @@ const TreeEditorPage = () => {
 
   const backgroundStyles = {
     mountains: {
-      background: `
-        linear-gradient(180deg, 
-          rgba(255,255,255,0.1) 0%, 
-          transparent 20%
-        ),
-        linear-gradient(135deg, 
-          #2563eb 0%, 
-          #4338ca 25%, 
-          #7c3aed 50%, 
-          #a855f7 75%, 
-          #ec4899 100%
-        )
-      `,
+      backgroundColor: '#1f2937',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
@@ -380,6 +368,11 @@ const TreeEditorPage = () => {
         {/* Кнопка редактирования - показывается только при наведении */}
         <button
           className="edit-button absolute -top-2 -right-2 w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center z-50"
+          style={{ 
+            opacity: 0,
+            visibility: 'hidden',
+            transition: 'opacity 0.2s ease-in-out, visibility 0.2s ease-in-out'
+          }}
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
