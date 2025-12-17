@@ -159,6 +159,17 @@
   display: block !important;
 }
 
+/* Стили для кнопки редактирования - скрыта по умолчанию */
+.person-card .edit-button {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Показываем кнопку при наведении на карточку */
+.person-card:hover .edit-button {
+  opacity: 1;
+}
+
 /* Стили для экспорта - убеждаемся что все элементы видны */
 .react-flow__node {
   background-color: white !important;

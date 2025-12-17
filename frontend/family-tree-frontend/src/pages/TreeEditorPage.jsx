@@ -344,7 +344,7 @@ const TreeEditorPage = () => {
   const PersonNode = useCallback(({ data, selected, id }) => {
     return (
       <div 
-        className={`group px-4 py-3 shadow-lg rounded-lg border-2 bg-white min-w-[150px] relative hover:shadow-xl transition-all duration-200 ${
+        className={`person-card group px-4 py-3 shadow-lg rounded-lg border-2 bg-white min-w-[150px] relative hover:shadow-xl transition-all duration-200 ${
           selected ? 'border-blue-500' : 'border-gray-200'
         }`}
         title="Наведите для редактирования"
@@ -379,7 +379,7 @@ const TreeEditorPage = () => {
 
         {/* Кнопка редактирования - показывается только при наведении */}
         <button
-          className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 z-50 opacity-0 group-hover:opacity-100"
+          className="edit-button absolute -top-2 -right-2 w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center z-50"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
