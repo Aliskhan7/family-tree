@@ -90,10 +90,20 @@ const TreeEditorPage = () => {
     setIsLoading(true);
     try {
       const response = await treesAPI.getTree(treeId);
-      const tree = response.tree;
+      const tree = response?.tree;
       
-      setTreeName(tree.name);
-      setBackgroundImage(tree.background_image || 'mountains');
+      if (!tree) {
+        throw new Error('Дерево не найдено');
+      }
+      
+      setTreeName(tree.name || 'Новое дерево');
+      
+      // Проверяем, что фон существует в наших доступных вариантах
+      const availableBackgrounds = ['mountains', 'sunset', 'plain'];
+      const backgroundImage = tree.background_image && availableBackgrounds.includes(tree.background_image) 
+        ? tree.background_image 
+        : 'mountains';
+      setBackgroundImage(backgroundImage);
       
       if (tree.data && tree.data.nodes) {
         setNodes(tree.data.nodes);
@@ -281,9 +291,6 @@ const TreeEditorPage = () => {
         navigate(`/tree/${response.tree.id}`, { replace: true });
       }
       
-      // Показываем уведомление об успешном сохранении
-      // TODO: Добавить toast уведомления
-      console.log('Дерево сохранено:', response);
       
     } catch (error) {
       setError('Ошибка сохранения дерева');
@@ -313,39 +320,6 @@ const TreeEditorPage = () => {
       backgroundRepeat: 'no-repeat',
       minHeight: '100vh',
       width: '100%',
-      position: 'relative'
-    },
-    'mountains-original': {
-      backgroundImage: 'url(/backgrounds/mountains.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      minHeight: '100vh',
-      width: '100%',
-      height: '100%',
-      position: 'relative'
-    },
-    forest: {
-      backgroundImage: 'url(/backgrounds/forest.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      minHeight: '100vh',
-      width: '100%',
-      height: '100%',
-      position: 'relative'
-    },
-    ocean: {
-      backgroundImage: 'url(/backgrounds/ocean.jpg)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      minHeight: '100vh',
-      width: '100%',
-      height: '100%',
       position: 'relative'
     },
     sunset: {
@@ -403,9 +377,9 @@ const TreeEditorPage = () => {
           style={{ background: '#e11d48', width: 8, height: 8, top: '50%' }}
         />
 
-        {/* Кнопка редактирования */}
+        {/* Кнопка редактирования - показывается только при наведении */}
         <button
-          className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 z-50 opacity-100 hover:opacity-100"
+          className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 z-50 opacity-0 group-hover:opacity-100"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -612,7 +586,6 @@ const TreeEditorPage = () => {
               <Button variant="outline" size="sm" className="whitespace-nowrap">
                 <Settings className="h-4 w-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Настройки</span>
-                <span className="sm:hidden">⚙️</span>
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
@@ -627,12 +600,9 @@ const TreeEditorPage = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="mountains">🏔️ Горы (HD градиент)</SelectItem>
-                      <SelectItem value="mountains-original">🏔️ Горы (оригинал)</SelectItem>
-                      <SelectItem value="forest">🌲 Лес</SelectItem>
-                      <SelectItem value="ocean">🌊 Океан</SelectItem>
-                      <SelectItem value="sunset">🌅 Закат</SelectItem>
-                      <SelectItem value="plain">⚪ Простой</SelectItem>
+                      <SelectItem value="mountains">Градиент</SelectItem>
+                      <SelectItem value="sunset">Закат</SelectItem>
+                      <SelectItem value="plain">Простой</SelectItem>
                       {customBackground && <SelectItem value="custom">🖼️ Ваше изображение</SelectItem>}
                     </SelectContent>
                   </Select>
@@ -669,7 +639,6 @@ const TreeEditorPage = () => {
               <Save className="h-4 w-4 mr-1 sm:mr-2" />
             )}
             <span className="hidden sm:inline">Сохранить</span>
-            <span className="sm:hidden">💾</span>
           </Button>
 
           <TreeExporter 

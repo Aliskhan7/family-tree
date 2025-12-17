@@ -30,30 +30,23 @@ const TreeExporter = ({
         canvas.height = rect.height;
         
         // Сначала рисуем фоновое изображение
-        if (backgroundImage && backgroundImage !== 'mountains' && backgroundImage !== 'plain') {
+        if (backgroundImage === 'sunset') {
           const bgImage = new Image();
           bgImage.crossOrigin = 'anonymous';
           
-          const imageUrl = backgroundImage === 'mountains-original' ? '/backgrounds/mountains.jpg' :
-                          backgroundImage === 'forest' ? '/backgrounds/forest.jpg' :
-                          backgroundImage === 'ocean' ? '/backgrounds/ocean.jpg' :
-                          backgroundImage === 'sunset' ? '/backgrounds/sunset.jpg' : null;
-          
-          if (imageUrl) {
-            await new Promise((resolve, reject) => {
-              bgImage.onload = () => {
-                // Рисуем фоновое изображение с cover эффектом
-                const scale = Math.max(canvas.width / bgImage.width, canvas.height / bgImage.height);
-                const x = (canvas.width - bgImage.width * scale) / 2;
-                const y = (canvas.height - bgImage.height * scale) / 2;
-                
-                ctx.drawImage(bgImage, x, y, bgImage.width * scale, bgImage.height * scale);
-                resolve();
-              };
-              bgImage.onerror = reject;
-              bgImage.src = imageUrl;
-            });
-          }
+          await new Promise((resolve, reject) => {
+            bgImage.onload = () => {
+              // Рисуем фоновое изображение с cover эффектом
+              const scale = Math.max(canvas.width / bgImage.width, canvas.height / bgImage.height);
+              const x = (canvas.width - bgImage.width * scale) / 2;
+              const y = (canvas.height - bgImage.height * scale) / 2;
+              
+              ctx.drawImage(bgImage, x, y, bgImage.width * scale, bgImage.height * scale);
+              resolve();
+            };
+            bgImage.onerror = reject;
+            bgImage.src = '/backgrounds/sunset.jpg';
+          });
         } else if (backgroundImage === 'mountains') {
           // Рисуем градиент для горы
           const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
@@ -119,7 +112,6 @@ const TreeExporter = ({
     <Button variant="outline" size="sm" onClick={exportTree} className={className}>
       <Download className="h-4 w-4 sm:mr-2" />
       <span className="hidden sm:inline">Скачать</span>
-      <span className="inline sm:hidden">📥</span>
     </Button>
   );
 };

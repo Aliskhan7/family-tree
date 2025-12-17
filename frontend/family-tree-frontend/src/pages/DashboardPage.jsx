@@ -77,13 +77,11 @@ const DashboardPage = () => {
 
   const getBackgroundName = (background) => {
     const backgrounds = {
-      mountains: 'Горы',
-      forest: 'Лес',
-      ocean: 'Океан',
+      mountains: 'Градиент',
       sunset: 'Закат',
       plain: 'Простой'
     };
-    return backgrounds[background] || 'Горы';
+    return backgrounds[background] || 'Градиент';
   };
 
   return (
