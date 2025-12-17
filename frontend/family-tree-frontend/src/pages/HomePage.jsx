@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { TreePine, Users, Download, Shield, Sparkles, ArrowRight } from 'lucide-react';
+import { TreePine, Users, Download, Shield, Sparkles, ArrowRight, Globe, MessageCircle, Instagram } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const HomePage = () => {
@@ -164,25 +164,28 @@ const HomePage = () => {
                 href="https://ag-one.netlify.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+                className="flex items-center space-x-2 text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm group"
               >
-                🌐 Портфолио
+                <Globe className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
+                <span>Портфолио</span>
               </a>
               <a 
                 href="https://t.me/agfrontend" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+                className="flex items-center space-x-2 text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm group"
               >
-                📱 Telegram
+                <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
+                <span>Telegram</span>
               </a>
               <a 
                 href="https://www.instagram.com/a.gazamatov" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm"
+                className="flex items-center space-x-2 text-gray-400 hover:text-amber-400 transition-colors duration-200 text-sm group"
               >
-                📸 Instagram
+                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
+                <span>Instagram</span>
               </a>
             </div>
             
